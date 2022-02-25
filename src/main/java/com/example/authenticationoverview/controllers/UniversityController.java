@@ -15,24 +15,23 @@ public class UniversityController {
     @Autowired
     private UniversityRepo universityRepo;
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/test")
-    public String test() throws Exception {
-        return "inn university";
+    public String test() {
+        return "in university test endpoint";
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
+//    @PreAuthorize("hasAnyRole('ADMIN','EDITOR')")
     @PostMapping
-    public UniversityDB addUniversity(@RequestBody UniversityDB universityDB) throws Exception {
-//        System.out.println("name:"+universityDB.getUname());
-        UniversityDB universityDB1 = universityRepo.save(universityDB);
-        return universityDB1;
+    public UniversityDB addUniversity(@RequestBody UniversityDB universityDB) {
+        UniversityDB savedUniversity = universityRepo.save(universityDB);
+        return savedUniversity;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','EDITOR','USER','PUBLIC')")
+//    @PreAuthorize("hasAnyRole('ADMIN','EDITOR','USER','PUBLIC')")
     @GetMapping
-    public List<UniversityDB> getUniversities() throws Exception {
-        List<UniversityDB> universityDB1 = universityRepo.findAll();
-        return universityDB1;
+    public List<UniversityDB> getUniversities() {
+        List<UniversityDB> allUniversitydata = universityRepo.findAll();
+        return allUniversitydata;
     }
 }

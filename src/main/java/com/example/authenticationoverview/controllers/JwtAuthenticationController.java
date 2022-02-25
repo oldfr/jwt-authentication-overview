@@ -1,24 +1,23 @@
 package com.example.authenticationoverview.controllers;
 
-import java.util.Objects;
-
 import com.example.authenticationoverview.dao.AuthData;
 import com.example.authenticationoverview.jwtpack.JwtResponse;
 import com.example.authenticationoverview.jwtpack.JwtTokenUtil;
 import com.example.authenticationoverview.jwtpack.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin
 public class JwtAuthenticationController {
 
     @Autowired
@@ -42,12 +41,6 @@ public class JwtAuthenticationController {
 
         return ResponseEntity.ok(new JwtResponse(token));
     }
-
-//    @PreAuthorize("hasRole('ADMIN')")
-//    @GetMapping("/test")
-//    public String test() throws Exception {
-//        return "Hello";
-//    }
 
     private void authenticate(String username, String password) throws Exception {
         try {

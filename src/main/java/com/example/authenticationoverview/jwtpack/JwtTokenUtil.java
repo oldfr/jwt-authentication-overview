@@ -44,8 +44,7 @@ public class JwtTokenUtil implements Serializable {
     }
     //for retrieveing any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
-        Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-        return claims;
+        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
     //check if the token has expired
@@ -58,13 +57,11 @@ public class JwtTokenUtil implements Serializable {
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         Set<String> userRoles = new HashSet<>();
-/*        AuthData role = authDataRepo.findByUsername(userDetails.getUsername());
-        userRoles.add(role.getRole());
-        claims.put("Roles",userRoles.toArray());*/
-        AuthData role = authDataRepo.findByUsername(userDetails.getUsername());
+       // to use roles uncomment below code
+        /* AuthData role = authDataRepo.findByUsername(userDetails.getUsername());
         userRoles.add(role.getRole());
         Object[] roles = role.getRole().split(",");
-        claims.put("Roles",roles);
+        claims.put("Roles",roles);*/
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
