@@ -27,6 +27,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         System.out.println("authData:"+authData);
         if (authData!= null) {
             Collection<String> mappedAuthorities = Arrays.asList(authData.getRole().split(","));
+            // if not using role based authentication, we can pass empty List instead of mappedAuthorities
             User user = new User(username, new BCryptPasswordEncoder().encode(authData.getPassword()), mappedAuthorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
             return user;
         } else {
