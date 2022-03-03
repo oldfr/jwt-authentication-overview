@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Universities")
+@Table(name = "University")
 public class UniversityDB implements Serializable {
 
     @Id

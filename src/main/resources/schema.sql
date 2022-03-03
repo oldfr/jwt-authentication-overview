@@ -7,7 +7,7 @@ CREATE TABLE UserData (
   role VARCHAR(250) NOT NULL
 );
 
-CREATE TABLE Universities (
+CREATE TABLE University (
   id INT AUTO_INCREMENT  PRIMARY KEY,
   uname VARCHAR(250) NOT NULL,
   address VARCHAR(250) NOT NULL
