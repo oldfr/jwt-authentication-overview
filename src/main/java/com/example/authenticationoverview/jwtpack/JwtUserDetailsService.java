@@ -1,7 +1,7 @@
 package com.example.authenticationoverview.jwtpack;
 
-import com.example.authenticationoverview.dao.AuthData;
-import com.example.authenticationoverview.dao.AuthDataRepo;
+import com.example.authenticationoverview.dao.UserData;
+import com.example.authenticationoverview.dao.UserDataRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -19,16 +19,16 @@ import java.util.stream.Collectors;
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private AuthDataRepo authDataRepo;
+    private UserDataRepo userDataRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AuthData authData = authDataRepo.findByUsername(username);
-        System.out.println("authData:"+authData);
-        if (authData!= null) {
-            Collection<String> mappedAuthorities = Arrays.asList(authData.getRole().split(","));
+        UserData userData = userDataRepo.findByUsername(username);
+        System.out.println("authData:"+ userData);
+        if (userData != null) {
+            Collection<String> mappedAuthorities = Arrays.asList(userData.getRole().split(","));
             // if not using role based authentication, we can pass empty List instead of mappedAuthorities
-            User user = new User(username, new BCryptPasswordEncoder().encode(authData.getPassword()), mappedAuthorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+            User user = new User(username, new BCryptPasswordEncoder().encode(userData.getPassword()), mappedAuthorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
             return user;
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);

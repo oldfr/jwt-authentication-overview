@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Function;
 
-import com.example.authenticationoverview.dao.AuthData;
-import com.example.authenticationoverview.dao.AuthDataRepo;
+import com.example.authenticationoverview.dao.UserDataRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +22,7 @@ public class JwtTokenUtil implements Serializable {
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
     @Autowired
-    AuthDataRepo authDataRepo;
+    UserDataRepo userDataRepo;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -58,7 +57,7 @@ public class JwtTokenUtil implements Serializable {
         Map<String, Object> claims = new HashMap<>();
         Set<String> userRoles = new HashSet<>();
        // to use roles uncomment below code
-        /* AuthData role = authDataRepo.findByUsername(userDetails.getUsername());
+        /* UserData role = userDataRepo.findByUsername(userDetails.getUsername());
         userRoles.add(role.getRole());
         Object[] roles = role.getRole().split(",");
         claims.put("Roles",roles);*/

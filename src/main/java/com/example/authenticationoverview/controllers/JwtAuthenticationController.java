@@ -1,6 +1,6 @@
 package com.example.authenticationoverview.controllers;
 
-import com.example.authenticationoverview.dao.AuthData;
+import com.example.authenticationoverview.dao.UserData;
 import com.example.authenticationoverview.jwtpack.JwtResponse;
 import com.example.authenticationoverview.jwtpack.JwtTokenUtil;
 import com.example.authenticationoverview.jwtpack.JwtUserDetailsService;
@@ -30,7 +30,7 @@ public class JwtAuthenticationController {
     private JwtUserDetailsService userDetailsService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthData authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody UserData authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
