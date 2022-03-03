@@ -24,7 +24,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserData userData = userDataRepo.findByUsername(username);
-        System.out.println("authData:"+ userData);
+        System.out.println("userData:"+ userData);
         if (userData != null) {
             Collection<String> mappedAuthorities = Arrays.asList(userData.getRole().split(","));
             // if not using role based authentication, we can pass empty List instead of mappedAuthorities
